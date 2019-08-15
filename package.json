@@ -1,0 +1,11 @@
+{
+  "name": "borges",
+  "version": "1.0.0",
+  "description": "sample automated test suite in Cypress for a dummy ecommerce web app",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
