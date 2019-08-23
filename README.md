@@ -1,4 +1,4 @@
-![Borges Labyrinth](/Users/ameliakindall/Sundry-Projects/Borges/borges.jpg)
+![Borges Labyrinth](https://github.com/ameliakindall/Borges/blob/master/borges.jpg)
 
 # Borges 
 This is an automated test suite I created using Javascript and Cypress to test a demo ecommerce site. This is a personal project that I created to demonstrate some of the automated testing work that I've done in my previous roles, and more importantly, so I can continue to experiment and learn more about my favorite automated testing framework!
