@@ -1,6 +1,6 @@
 <div class="header">
   <h1 align="center">
-    <img src="https://github.com/ameliakindall/Borges/blob/readme/borgesalt.jpg" alt="Borges Ribbon Person" align="center" width="300" height="300" />
+    <img src="https://github.com/ameliakindall/Borges/blob/master/borgesalt.jpg" alt="Borges Ribbon Person" align="center" width="300" height="300" />
     <br></br>
   Borges
   </h1>
