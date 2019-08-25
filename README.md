@@ -8,6 +8,19 @@
     <img alt="npm" src="https://img.shields.io/npm/v/npm?style=for-the-badge">
     <img alt="npm" src="https://img.shields.io/npm/v/cypress?color=Orange&label=Cypress&style=for-the-badge">
     <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/ameliakindall/Borges?color=teal&style=for-the-badge">
+ </p>
+  <p align="center">
+    <a href="#background">Background</a>
+    &bull;
+  <a href="#prerequisites">Prerequisites</a>
+    &bull;
+    <a href="#installation">Installation</a>
+    &bull;
+  <a href="#running-the-tests">Running Tests</a>
+  &bull;
+  <a href="#notes-on-project-structure">Project Structure</a>
+  &bull;
+  <a href="#ask-me-why-cypress-is-my-favorite-automated-testing-framework">Framework</a>
   </p>
   <h4 align="center">
     An automated test suite using the
