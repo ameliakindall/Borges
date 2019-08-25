@@ -8,6 +8,7 @@
       An automated test suite using the
       <a href="https://www.cypress.io"> Cypress </a>
       framework.
+   <br>
       <p class="badges" align="center">
          <img alt="npm" src="https://img.shields.io/npm/v/npm?style=for-the-badge">
          <img alt="npm" src="https://img.shields.io/npm/v/cypress?color=Orange&label=Cypress&style=for-the-badge">
