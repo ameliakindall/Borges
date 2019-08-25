@@ -17,7 +17,7 @@
 </div>
 
 ### Background
-This is an automated test suite for I created using Javascript and Cypress to test [a demo ecommerce site](http://automationpractice.com/index.php). This is a personal project that I created to demonstrate some of the automated testing work that I've done in my previous roles, and more importantly, so I can continue to experiment and learn more about my favorite automated testing framework! Cypress has a desktop application that enables you to run tests, view results, and debug. Cypress takes snapshots as the test runs so you're able to go back and see what state the application was in at each step.
+This is an automated test suite that I created using Javascript and Cypress to test [a demo ecommerce site](http://automationpractice.com/index.php). This is a personal project that I created to demonstrate some of the automated testing work that I've done in my previous roles, and more importantly, so I can continue to experiment and learn more about my favorite automated testing framework! Cypress has a desktop application that enables you to run tests, view results, and debug. Cypress takes snapshots as the test runs so you're able to go back and see what state the application was in at each step.
 
 ### Prerequisites
 [You need to install NPM](https://www.npmjs.com/get-npm)
@@ -26,7 +26,7 @@ This is an automated test suite for I created using Javascript and Cypress to te
 ##### 1. Install Cypress
 cd into your home directory and run:
 `npm install cypress --save-dev`
-Go to the [Cypress Docs](https://on.cypress.io/guides/installing-and-running#section-installing) for more details. This will install the desktop app.
+This will install the desktop app. In the event of any installation hiccups or if you need more specific information, Cypress has excellent [documentation](https://on.cypress.io/guides/installing-and-running#section-installing).
 
 ##### 2.Clone this repo
 ```
@@ -41,7 +41,7 @@ npm install
 }
 ```
 ##### 3. Create a cypress.json file
-This is included in the .gitignore because it is where local configurations are supposed to go. It's also where the baseUrl is set, so it's important that you add this:
+This is included in the .gitignore because it is where local configurations are supposed to go. It's also where the baseUrl is set, so it's **important** that you add this to get the tests to run:
 ```
 // go to the project
 cd Borges
@@ -56,10 +56,19 @@ cat > cypress.json
   "viewportHeight": 1080
 }
 ```
-##### 4. Open Cypress
-To open the Cypress desktop app, run the following script: `npm run cypress:open` (this is defined in the package.json file)
+##### 4. Open the Cypress desktop app
+Now that everything is installed, you can open the Cypress desktop app and run the tests. To do so, cd into the project and run the following script: `npm run cypress:open` (this is defined in the package.json file).
 
 ### Running the tests
+With the desktop app open, it's as simple as clicking on one of the spec files on the list to run all of the tests in that spec. You can also click the `Run All specs` button on the top right hand corner to run all of them at once. 
+
+![](run-spec.gif)
+
+This will open up a window with the command log and test status on the left and a preview of the application on the right. From here you can stop the tests, re-run the test, click on commands, and use the chrome dev tools to debug.
+
+![](test-runner.gif)
+
+Again, I won't go into too much detail here about the test runner itself because Cypress does a great job of that [here](https://docs.cypress.io/guides/core-concepts/test-runner.html#Overview).
 
 ### Notes on Typescript tooling and IDEs
 
