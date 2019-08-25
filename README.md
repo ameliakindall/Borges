@@ -79,12 +79,13 @@ Now that everything is installed, you can open the Cypress desktop app and run t
 ### Running the tests
 ---
 With the desktop app open, it's as simple as clicking on one of the spec files on the list to run all of the tests in that spec. You can also click the `Run All specs` button on the top right hand corner to run all of them at once. 
-
-![](run-spec.gif)
+<p align="center">
+<img src="https://github.com/ameliakindall/Borges/blob/master/run-spec.gif" width="800" height="500" alt="run the spec" align="center">                                                                                                               </p>
 
 This will open up a window with the command log and test status on the left and a preview of the application on the right. From here you can stop the tests, re-run the test, click on commands, and use the chrome dev tools to debug. Again, I won't go into too much detail here about the test runner itself because Cypress does a great job of that [here](https://docs.cypress.io/guides/core-concepts/test-runner.html#Overview).
-
-![](test-runner.gif)
+<p align="center">
+<img src="https://github.com/ameliakindall/Borges/blob/master/test-runner.gif" width="800" height="500" alt="test runner" align="center">
+</p>
 
 ### Notes on project structure
 ---
