@@ -64,14 +64,25 @@ With the desktop app open, it's as simple as clicking on one of the spec files o
 
 ![](run-spec.gif)
 
-This will open up a window with the command log and test status on the left and a preview of the application on the right. From here you can stop the tests, re-run the test, click on commands, and use the chrome dev tools to debug.
+This will open up a window with the command log and test status on the left and a preview of the application on the right. From here you can stop the tests, re-run the test, click on commands, and use the chrome dev tools to debug. Again, I won't go into too much detail here about the test runner itself because Cypress does a great job of that [here](https://docs.cypress.io/guides/core-concepts/test-runner.html#Overview).
 
 ![](test-runner.gif)
 
-Again, I won't go into too much detail here about the test runner itself because Cypress does a great job of that [here](https://docs.cypress.io/guides/core-concepts/test-runner.html#Overview).
+### Notes on project structure
+The [project folder structure](https://docs.cypress.io/guides/core-concepts/writing-and-organizing-tests.html#Folder-Structure) is how Cypress projects come out of the box. I'll give you a brief overview and point out any spots where my project deviates from this:
+- `cypress/integration` directory contains all of the spec files (in other words, all of the tests)
+- `cypress/fixtures` contains data that can be used in the tests, such as when making network requests
+-`cypress/support/commands` contains custom commands for behavior that is used all throughout your app, such as logging in.
+- `cypress/support/index.js`runs before every single spec file and is a good place to put global hooks
+- `cypress.json` is where you put local configurations, such as viewport dimensions, the baseUrl, or passwords and keys
 
-### Notes on Typescript tooling and IDEs
+### Ask me why Cypress is my favorite automated testing framework
+- Automatic waits for element loading and animations + automatic retries = not having to write all sorts of utility methods for explicit waits. This is the biggest pain point for me when writing tests using selenium-based tools.
 
-##### What's up with the name? 
-Jorge Luis Borges was an Argentine writer of strange, labyrinthine little metafictions and poems that have absolutely nothing to do with code, automated testing, or my career but I adore them nonetheless. This breaks the rules of meaningful and descriptive names for repositories, but the name makes me happy when I see it, and to me, that's worth risking incoherence.
+- Clear error messages and the test runner's visual aids enable anyone on a team to investigate test failures. You can traverse and click on the steps to actually see what the application looked like when a certain command was called. 
+
+- Has access to your app's window and document objects, so you can potentially write tests that call your apps methods directly (instead of using the UI) to speed up tests where you need to set up state. 
+
+### Uh, what's up with the project name? 
+Jorge Luis Borges was an Argentine writer of strange, labyrinthine little metafictions and poems that have absolutely nothing to do with code, automated testing, or my career. This breaks the rules of meaningful and descriptive names for repositories, but the name makes me happy when I see it, and to me, that's worth risking incoherence. Also, no one is going to read this far down :rainbow:
 
