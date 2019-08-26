@@ -9,11 +9,7 @@ describe("Login form", () => {
 
   context("Form elements", () => {
     it("Links to /?controller=password", () => {
-
+      cy.get("#login_form").should("be.visible")
     })
-  })
-
-  it("test that the before hook works", () => {
-    cy.get("#login_form").should("be.visible")
   })
 })
