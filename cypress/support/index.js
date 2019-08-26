@@ -18,6 +18,5 @@ import './commands'
 
 // Global before hook to visit homepage before each test
 beforeEach( function () {
-  cy.logout();
   cy.visit( '/' );
 } )
