@@ -15,8 +15,3 @@
 
 // Import commands.js using ES2015 syntax:
 import './commands'
-
-// Global before hook to visit homepage before each test
-beforeEach( function () {
-  cy.visit( '/' );
-} )
