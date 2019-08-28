@@ -5,7 +5,7 @@ describe( "Login form", () => {
 
   const username = Cypress.env("username")
   const password = Cypress.env("password")
-  
+
   beforeEach( () => {
     cy
       .visit( "?controller=my-account" )
@@ -42,4 +42,15 @@ describe( "Login form", () => {
     } )
 
   } )
+
+  context( "Form validation", () => {
+    
+    it( "Requires an email", () => {
+
+    })
+
+    it("Requires a password", () => {
+
+    })
+  })
 } )
