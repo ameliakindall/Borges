@@ -5,16 +5,27 @@ describe( "Login form", () => {
 
   beforeEach( () => {
     cy
-      .visit( "/?controller=authentication&back=my-account" )
-      .get( "#login_form" ).as( 'form' )
+      .visit( "?controller=my-account" )
+      .get( "#login_form" ).as( "form" ).within( () => {
+        cy
+          .get( "label" ).as( 'labels' )
 
+      } )
   } )
 
   context( "Form elements", () => {
 
-    it( "Has an 'Already registered?' header", () => {
+    it( "Greets with 'Already registered?'", () => {
       cy.get( "@form" ).within( () => {
         cy.contains( "Already registered?" ).should( "be.visible" )
+      } )
+    } )
+
+    it( "Has labels for the email and password inputs", () => {
+      const expectedLabels = [ 'Email address', "Password" ]
+      cy.get( "@labels" ).each( ( label ) => {
+        expect( expectedLabels ).to.include( label.text() )
+        expect( label ).to.be.visible
       } )
     } )
 
@@ -27,5 +38,5 @@ describe( "Login form", () => {
       } )
     } )
 
-})
+  } )
 } )
