@@ -3,25 +3,28 @@
 
 describe( "Login form", () => {
 
-  const username = Cypress.env("username")
-  const password = Cypress.env("password")
+  const username = Cypress.env( "username" )
+  const password = Cypress.env( "password" )
 
   beforeEach( () => {
     cy
       .visit( "?controller=my-account" )
-      .get( "#login_form" ).as( "form" ).within( () => {
-        cy
-          .get( "label" ).as( 'labels' )
-
-      } )
+      .get( "#login_form" ).as( "form" )
   } )
 
   context( "Form elements", () => {
 
-    it( "Greets with 'Already registered?'", () => {
+    beforeEach( () => {
       cy.get( "@form" ).within( () => {
-        cy.contains( "Already registered?" ).should( "be.visible" )
+        cy
+          .get( "label" ).as( 'labels' )
+          .get( "h3" ).as( "heading" )
+          .get( "a" ).as( "recoverPassword" )
       } )
+    } )
+
+    it( "Greets with 'Already registered?'", () => {
+      cy.get( "@heading" ).contains( "Already registered?" ).should( "be.visible" )
     } )
 
     it( "Has labels for the email and password inputs", () => {
@@ -33,24 +36,23 @@ describe( "Login form", () => {
     } )
 
     it( "Links to /?controller=password", () => {
-      cy.get( "@form" ).within( () => {
-        cy
-          .contains( "Forgot your password?" )
-          .should( "have.attr", "href", `${Cypress.config().baseUrl}?controller=password` )
-          .and( "be.visible" )
+      cy.get( "@recoverPassword" ).should( ( link ) => {
+        expect( link ).to.be.visible
+        expect( link.text() ).to.eql( "Forgot your password?" )
+        expect( link.attr( "href" ) ).to.eql( `${Cypress.config().baseUrl}?controller=password` )
       } )
     } )
 
   } )
 
   context( "Form validation", () => {
-    
+
     it( "Requires an email", () => {
 
-    })
+    } )
 
-    it("Requires a password", () => {
+    it( "Requires a password", () => {
 
-    })
-  })
+    } )
+  } )
 } )
