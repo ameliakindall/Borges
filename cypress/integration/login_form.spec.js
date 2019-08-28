@@ -3,9 +3,6 @@
 
 describe( "Login form", () => {
 
-  const username = Cypress.env( "username" )
-  const password = Cypress.env( "password" )
-
   beforeEach( () => {
     cy
       .visit( "?controller=my-account" )
@@ -42,7 +39,6 @@ describe( "Login form", () => {
         expect( link.attr( "href" ) ).to.eql( `${Cypress.config().baseUrl}?controller=password` )
       } )
     } )
-
   } )
 
   context( "Form validation", () => {
