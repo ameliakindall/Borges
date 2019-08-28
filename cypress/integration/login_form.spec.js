@@ -3,6 +3,9 @@
 
 describe( "Login form", () => {
 
+  const username = Cypress.env("username")
+  const password = Cypress.env("password")
+  
   beforeEach( () => {
     cy
       .visit( "?controller=my-account" )
