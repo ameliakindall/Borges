@@ -42,6 +42,9 @@ describe( "Login form", () => {
   } )
 
   context( "Form validation", () => {
+    
+    const username = Cypress.env( "username" )
+    const password = Cypress.env( "password" )
 
     it( "Requires an email", () => {
 
