@@ -3,6 +3,9 @@
 
 describe( "Login form", () => {
 
+  const username = Cypress.env( "username" )
+  const password = Cypress.env( "password" )
+
   beforeEach( () => {
     cy
       .visit( "?controller=my-account" )
@@ -43,31 +46,34 @@ describe( "Login form", () => {
 
   context( "Form validation", () => {
     beforeEach( () => {
-      cy.get("@form").within( () => {
+      cy.get( "@form" ).within( () => {
         cy
-          .get("button").as("submitButton")
-          .get("input.account_input").as("inputs").spread( (email, password) => {
-            cy.wrap(email).as("emailInput")
-            cy.wrap(password).as("passInput")
-          })
-      })
-    })
-
-    const username = Cypress.env( "username" )
-    const password = Cypress.env( "password" )
-// the alert class actually returns two alerts, one of which is hidden, I need to fix this
-    it.only( "Requires an email", () => {
-      cy
-      .get("@submitButton").click()
-      .get(".alert:visible").should("be.visible").then( (alerts) => {
-        cy.log(alerts.length)
-        // .get("p").should("have.text", "There is 1 error")
-        // .get("li").should("have.text", "An email address required.")
-      })
+          .get( "button" ).as( "submitButton" )
+          .get( "input.account_input" ).as( "inputs" ).spread( ( email, password ) => {
+            cy.wrap( email ).as( "emailInput" )
+            cy.wrap( password ).as( "passInput" )
+          } )
+      } )
     } )
 
-    it( "Requires a password", () => {
+    it( "Requires an email", () => {
+      cy
+        .get( "@submitButton" ).click()
+        .get( ".alert:visible" ).within( () => {
+          cy
+            .get( "p" ).should( "have.text", "There is 1 error" ).and("be.visible")
+            .get( "li" ).should( "have.text", "An email address required." ).and("be.visible")
+        } )
+    } )
 
+    it.only( "Requires a password", () => {
+      cy
+        .get( "@emailInput" ).type( `${username}{enter}` )
+        .get( ".alert:visible" ).within( () => {
+          cy
+            .get( "p" ).should( "have.text", "There is 1 error" ).and("be.visible")
+            .get( "li" ).should( "have.text", "Password is required." ).and("be.visible")
+        } )
     } )
   } )
 } )
