@@ -45,9 +45,9 @@ cd into your home directory and run:
 `npm install cypress --save-dev`
 This will install the desktop app. In the event of any installation hiccups or if you need more specific information, Cypress has excellent [documentation](https://on.cypress.io/guides/installing-and-running#section-installing).
 
-##### 2.Clone this repo
+##### 2. Clone this repo
 ```
-// clone this repo 
+// clone this repo
 git clone git@github.com:ameliakindall/Borges.git
 
 // cd into the cloned repo
@@ -57,23 +57,31 @@ cd Borges
 npm install
 }
 ```
-##### 3. Create a cypress.json file
-This is included in the .gitignore because it is where local configurations are supposed to go. It's also where the baseUrl is set, so it's **important** that you add this to get the tests to run:
+##### 3. Create a user account on the dummy web app for the tests to use
+You're going to create a test user account that the tests will use. Go to the [dummy web app](http://automationpractice.com/index.php?controller=authentication) and go through the steps to create an account. You can use fake information, just remember what the email and password is for step 4.
+
+##### 4. Create a cypress.json file
+This is included in the .gitignore because it is where local configurations are supposed to go. It's also where the baseUrl and login credentials are set, so it's **important** that you add this to get the tests to run:
 ```
 // go to the project
 cd Borges
 
-// create the file 
+// create the file
 cat > cypress.json
 
 // add the following configuration (viewport configurations are optional)
+//
 {
   "baseUrl": "http://automationpractice.com/index.php",
   "viewportWidth": 1920,
-  "viewportHeight": 1080
+  "viewportHeight": 1080,
+  "env": {
+    "username": "{user that you created in step 3}"
+    "password": "{password that you created in step 3}"
+  }
 }
 ```
-##### 4. Open the Cypress desktop app
+##### 5. Open the Cypress desktop app
 Now that everything is installed, you can open the Cypress desktop app and run the tests. To do so, cd into the project and run the following script: `npm run cypress:open` (this is defined in the package.json file).
 
 ### Running the tests
@@ -102,11 +110,10 @@ The [project folder structure](https://docs.cypress.io/guides/core-concepts/writ
 ---
 - Automatic waits for element loading and animations + automatic retries = not having to write all sorts of utility methods for explicit waits. This is the biggest pain point for me when writing tests using selenium-based tools.
 
-- Clear error messages and the test runner's visual aids enable anyone on a team to investigate test failures. You can traverse and click on the steps to actually see what the application looked like when a certain command was called. 
+- Clear error messages and the test runner's visual aids enable anyone on a team to investigate test failures. You can traverse and click on the steps to actually see what the application looked like when a certain command was called.
 
-- Has access to your app's window and document objects, so you can potentially write tests that call your apps methods directly (instead of using the UI) to speed up tests where you need to set up state. 
+- Has access to your app's window and document objects, so you can potentially write tests that call your apps methods directly (instead of using the UI) to speed up tests where you need to set up state.
 
 ### Uh, what's up with the project name?
 ---
 Jorge Luis Borges was an Argentine writer of strange, labyrinthine little metafictions and poems that have absolutely nothing to do with code, automated testing, or my career. This breaks the rules of meaningful and descriptive names for repositories, but the name makes me happy when I see it, and to me, that's worth risking incoherence. Also, no one is going to read this far down :rainbow:
-
