@@ -12,6 +12,20 @@ describe( "Login form", () => {
       .get( "#login_form" ).as( "form" )
   } )
 
+  /**
+   * Asserts that login error element is visible and contains the expected message.
+   * @param {string} errorMessage - Message you expect to see
+   * @return {void}
+   */
+
+  function verifyLoginError(errorMessage) {
+    cy.get( ".alert:visible" ).within( () => {
+      cy
+        .get( "p" ).should( "have.text", "There is 1 error" ).and( "be.visible" )
+        .get( "li" ).should( "have.text", errorMessage ).and( "be.visible" )
+    } )
+  }
+
   context( "Form elements", () => {
 
     beforeEach( () => {
@@ -27,8 +41,11 @@ describe( "Login form", () => {
       cy.get( "@heading" ).contains( "Already registered?" ).should( "be.visible" )
     } )
 
+    // TODO: change include test to read as expect( label.text() ).to.be.oneOf( expectedLabels )
     it( "Has labels for the email and password inputs", () => {
+
       const expectedLabels = [ 'Email address', "Password" ]
+
       cy.get( "@labels" ).each( ( label ) => {
         expect( expectedLabels ).to.include( label.text() )
         expect( label ).to.be.visible
@@ -45,35 +62,27 @@ describe( "Login form", () => {
   } )
 
   context( "Form validation", () => {
+
     beforeEach( () => {
       cy.get( "@form" ).within( () => {
         cy
           .get( "button" ).as( "submitButton" )
           .get( "input.account_input" ).as( "inputs" ).spread( ( email, password ) => {
             cy.wrap( email ).as( "emailInput" )
-            cy.wrap( password ).as( "passInput" )
+            cy.wrap( password ).as( "passwordInput" )
           } )
       } )
     } )
 
     it( "Requires an email", () => {
-      cy
-        .get( "@submitButton" ).click()
-        .get( ".alert:visible" ).within( () => {
-          cy
-            .get( "p" ).should( "have.text", "There is 1 error" ).and("be.visible")
-            .get( "li" ).should( "have.text", "An email address required." ).and("be.visible")
-        } )
+      cy.get( "@submitButton" ).click()
+      verifyLoginError( "An email address required." )
     } )
 
-    it.only( "Requires a password", () => {
+    it( "Requires a password", () => {
       cy
         .get( "@emailInput" ).type( `${username}{enter}` )
-        .get( ".alert:visible" ).within( () => {
-          cy
-            .get( "p" ).should( "have.text", "There is 1 error" ).and("be.visible")
-            .get( "li" ).should( "have.text", "Password is required." ).and("be.visible")
-        } )
+      verifyLoginError( "Password is required." )
     } )
   } )
 } )
