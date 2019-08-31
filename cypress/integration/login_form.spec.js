@@ -18,7 +18,7 @@ describe( "Login form", () => {
    * @return {void}
    */
 
-  function verifyLoginError(errorMessage) {
+  function verifyLoginError( errorMessage ) {
     cy.get( ".alert:visible" ).within( () => {
       cy
         .get( "p" ).should( "have.text", "There is 1 error" ).and( "be.visible" )
@@ -77,12 +77,14 @@ describe( "Login form", () => {
     it( "Requires an email", () => {
       cy.get( "@submitButton" ).click()
       verifyLoginError( "An email address required." )
+      cy.url().should( "eql", `${Cypress.config().baseUrl}?controller=authentication` )
     } )
 
     it( "Requires a password", () => {
       cy
         .get( "@emailInput" ).type( `${username}{enter}` )
       verifyLoginError( "Password is required." )
+      cy.url().should( "eql", `${Cypress.config().baseUrl}?controller=authentication` )
     } )
   } )
 } )
