@@ -81,13 +81,19 @@ describe( "Login form", () => {
       cy.url().should( "eql", `${Cypress.config().baseUrl}?controller=authentication` )
     } )
 
-    it.only( "Has email validation", () => {
+    it( "Has email validation", () => {
       cy
         .get( "@emailInput" ).type( "fake.fakerson@!$%.com" )
         .get( "@passwordInput" ).type( password )
         .get( "@submitButton" ).click()
       verifyLoginError( "Invalid email address." )
+    } )
 
+    it( "Has password validation", () => {
+      cy
+        .get( "@emailInput" ).type( username )
+        .get( "@passwordInput" ).type( `fa{enter}` )
+      verifyLoginError( "Invalid password." )
     } )
   } )
 } )
