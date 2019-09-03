@@ -12,12 +12,6 @@ describe( "Login form", () => {
       .get( "#login_form" ).as( "form" )
   } )
 
-  /**
-   * Asserts that login error element is visible and contains the expected message.
-   * @param {string} errorMessage - Message you expect to see
-   * @return {void}
-   */
-
   function verifyLoginError( errorMessage ) {
     cy.get( ".alert:visible" ).within( () => {
       cy
@@ -85,6 +79,15 @@ describe( "Login form", () => {
         .get( "@emailInput" ).type( `${username}{enter}` )
       verifyLoginError( "Password is required." )
       cy.url().should( "eql", `${Cypress.config().baseUrl}?controller=authentication` )
+    } )
+
+    it.only( "Has email validation", () => {
+      cy
+        .get( "@emailInput" ).type( "fake.fakerson@!$%.com" )
+        .get( "@passwordInput" ).type( password )
+        .get( "@submitButton" ).click()
+      verifyLoginError( "Invalid email address." )
+
     } )
   } )
 } )
