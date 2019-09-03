@@ -55,7 +55,21 @@ describe( "Login form", () => {
     } )
   } )
 
-  context( "Form validation", () => {
+  context.only( "Form validation", () => {
+
+    const invalidCreds = [
+      {
+        scenario: "email address",
+        email: "fake.fakerson@!$%.com",
+        pass: password
+      },
+
+      {
+        scenario: "password",
+        email: username,
+        pass: "fa"
+      }
+    ]
 
     beforeEach( () => {
       cy.get( "@form" ).within( () => {
@@ -81,19 +95,29 @@ describe( "Login form", () => {
       cy.url().should( "eql", `${Cypress.config().baseUrl}?controller=authentication` )
     } )
 
-    it( "Has email validation", () => {
-      cy
-        .get( "@emailInput" ).type( "fake.fakerson@!$%.com" )
-        .get( "@passwordInput" ).type( password )
-        .get( "@submitButton" ).click()
-      verifyLoginError( "Invalid email address." )
+    invalidCreds.forEach( ( scenario ) => {
+      it( `It has ${scenario.scenario} validation`, () => {
+        cy
+          .get( "@emailInput" ).type( scenario.email )
+          .get( "@passwordInput" ).type( scenario.pass )
+          .get( "@submitButton" ).click()
+        verifyLoginError( `Invalid ${scenario.scenario}.` )
+      } )
     } )
 
-    it( "Has password validation", () => {
-      cy
-        .get( "@emailInput" ).type( username )
-        .get( "@passwordInput" ).type( `fa{enter}` )
-      verifyLoginError( "Invalid password." )
-    } )
+    // it( "Has email validation", () => {
+    //   cy
+    //     .get( "@emailInput" ).type( "fake.fakerson@!$%.com" )
+    //     .get( "@passwordInput" ).type( password )
+    //     .get( "@submitButton" ).click()
+    //   verifyLoginError( "Invalid email address." )
+    // } )
+    //
+    // it( "Has password validation", () => {
+    //   cy
+    //     .get( "@emailInput" ).type( username )
+    //     .get( "@passwordInput" ).type( `fa{enter}` )
+    //   verifyLoginError( "Invalid password." )
+    // } )
   } )
 } )
