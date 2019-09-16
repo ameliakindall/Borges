@@ -8,7 +8,7 @@ describe( "Login form", () => {
 
   beforeEach( () => {
     cy
-      .visit( "?controller=my-account" )
+      .visit( "index.php?controller=authentication&back=my-account" )
       .get( "#login_form" ).as( "form" )
   } )
 
@@ -50,12 +50,12 @@ describe( "Login form", () => {
       cy.get( "@recoverPassword" ).should( ( link ) => {
         expect( link ).to.be.visible
         expect( link.text() ).to.eql( "Forgot your password?" )
-        expect( link.attr( "href" ) ).to.eql( `${Cypress.config().baseUrl}?controller=password` )
+        expect( link.attr( "href" ) ).to.eql( `${Cypress.config().baseUrl}/index.php?controller=password` )
       } )
     } )
   } )
 
-  context.only( "Form validation", () => {
+  context( "Form validation", () => {
 
     const invalidCreds = [
       {
@@ -92,14 +92,14 @@ describe( "Login form", () => {
     it( "Requires an email", () => {
       cy.get( "@submitButton" ).click()
       verifyLoginError( "An email address required." )
-      cy.url().should( "eql", `${Cypress.config().baseUrl}?controller=authentication` )
+      cy.url().should( "eql", `${Cypress.config().baseUrl}/index.php?controller=authentication` )
     } )
 
     it( "Requires a password", () => {
       cy
         .get( "@emailInput" ).type( `${username}{enter}` )
       verifyLoginError( "Password is required." )
-      cy.url().should( "eql", `${Cypress.config().baseUrl}?controller=authentication` )
+      cy.url().should( "eql", `${Cypress.config().baseUrl}/index.php?controller=authentication` )
     } )
 
     invalidCreds.forEach( ( scenario ) => {
@@ -109,7 +109,7 @@ describe( "Login form", () => {
           .get( "@passwordInput" ).type( scenario.pass )
           .get( "@submitButton" ).click()
         verifyLoginError( scenario.error )
-        cy.url().should( "eql", `${Cypress.config().baseUrl}?controller=authentication` )
+        cy.url().should( "eql", `${Cypress.config().baseUrl}/index.php?controller=authentication` )
       } )
     } )
   } )
