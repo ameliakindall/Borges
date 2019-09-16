@@ -59,13 +59,13 @@ describe( "Login form", () => {
 
     const invalidCreds = [
       {
-        scenario: "email address",
+        scenario: "email address validation",
         email: "fake.fakerson@!$%.com",
         pass: password
       },
 
       {
-        scenario: "password",
+        scenario: "password validation",
         email: username,
         pass: "fa"
       }
@@ -96,7 +96,7 @@ describe( "Login form", () => {
     } )
 
     invalidCreds.forEach( ( scenario ) => {
-      it( `It has ${scenario.scenario} validation`, () => {
+      it( `It has ${scenario.scenario}`, () => {
         cy
           .get( "@emailInput" ).type( scenario.email )
           .get( "@passwordInput" ).type( scenario.pass )
