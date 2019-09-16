@@ -8,7 +8,7 @@ describe( "Login form", () => {
 
   beforeEach( () => {
     cy
-      .visit( "?controller=my-account" )
+      .visit( "index.php?controller=authentication&back=my-account" )
       .get( "#login_form" ).as( "form" )
   } )
 
@@ -50,7 +50,7 @@ describe( "Login form", () => {
       cy.get( "@recoverPassword" ).should( ( link ) => {
         expect( link ).to.be.visible
         expect( link.text() ).to.eql( "Forgot your password?" )
-        expect( link.attr( "href" ) ).to.eql( `${Cypress.config().baseUrl}?controller=password` )
+        expect( link.attr( "href" ) ).to.eql( `${Cypress.config().baseUrl}/index.php?controller=password` )
       } )
     } )
   } )
@@ -59,16 +59,23 @@ describe( "Login form", () => {
 
     const invalidCreds = [
       {
-        scenario: "email address validation",
+        error: "Invalid email address.",
         email: "fake.fakerson@!$%.com",
         pass: password
       },
 
       {
-        scenario: "password validation",
+        error: "Invalid password.",
         email: username,
         pass: "fa"
-      }
+      },
+
+      {
+        error: "Authentication failed.",
+        email: username,
+        pass: "incorrectpassword"
+        }
+
     ]
 
     beforeEach( () => {
@@ -85,24 +92,24 @@ describe( "Login form", () => {
     it( "Requires an email", () => {
       cy.get( "@submitButton" ).click()
       verifyLoginError( "An email address required." )
-      cy.url().should( "eql", `${Cypress.config().baseUrl}?controller=authentication` )
+      cy.url().should( "eql", `${Cypress.config().baseUrl}/index.php?controller=authentication` )
     } )
 
     it( "Requires a password", () => {
       cy
         .get( "@emailInput" ).type( `${username}{enter}` )
       verifyLoginError( "Password is required." )
-      cy.url().should( "eql", `${Cypress.config().baseUrl}?controller=authentication` )
+      cy.url().should( "eql", `${Cypress.config().baseUrl}/index.php?controller=authentication` )
     } )
 
     invalidCreds.forEach( ( scenario ) => {
-      it( `It has ${scenario.scenario}`, () => {
+      it( `It displays the error: ${scenario.error}`, () => {
         cy
           .get( "@emailInput" ).type( scenario.email )
           .get( "@passwordInput" ).type( scenario.pass )
           .get( "@submitButton" ).click()
-        verifyLoginError( `Invalid ${scenario.scenario}.` )
-        cy.url().should( "eql", `${Cypress.config().baseUrl}?controller=authentication` )
+        verifyLoginError( scenario.error )
+        cy.url().should( "eql", `${Cypress.config().baseUrl}/index.php?controller=authentication` )
       } )
     } )
   } )

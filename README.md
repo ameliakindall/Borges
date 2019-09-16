@@ -72,7 +72,7 @@ cat > cypress.json
 // add the following configuration (viewport configurations are optional)
 //
 {
-  "baseUrl": "http://automationpractice.com/index.php",
+  "baseUrl": "http://automationpractice.com",
   "viewportWidth": 1920,
   "viewportHeight": 1080,
   "env": {
