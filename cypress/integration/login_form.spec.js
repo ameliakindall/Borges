@@ -55,7 +55,7 @@ describe( "Login form", () => {
     } )
   } )
 
-  context.only( "Form validation", () => {
+  context( "Form validation", () => {
 
     const invalidCreds = [
       {
@@ -102,6 +102,7 @@ describe( "Login form", () => {
           .get( "@passwordInput" ).type( scenario.pass )
           .get( "@submitButton" ).click()
         verifyLoginError( `Invalid ${scenario.scenario}.` )
+        cy.url().should( "eql", `${Cypress.config().baseUrl}?controller=authentication` )
       } )
     } )
   } )
