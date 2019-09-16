@@ -55,20 +55,27 @@ describe( "Login form", () => {
     } )
   } )
 
-  context( "Form validation", () => {
+  context.only( "Form validation", () => {
 
     const invalidCreds = [
       {
-        scenario: "email address validation",
+        error: "Invalid email address.",
         email: "fake.fakerson@!$%.com",
         pass: password
       },
 
       {
-        scenario: "password validation",
+        error: "Invalid password.",
         email: username,
         pass: "fa"
-      }
+      },
+
+      {
+        error: "Authentication failed.",
+        email: username,
+        pass: "incorrectpassword"
+        }
+
     ]
 
     beforeEach( () => {
@@ -96,12 +103,12 @@ describe( "Login form", () => {
     } )
 
     invalidCreds.forEach( ( scenario ) => {
-      it( `It has ${scenario.scenario}`, () => {
+      it( `It displays the error: ${scenario.error}`, () => {
         cy
           .get( "@emailInput" ).type( scenario.email )
           .get( "@passwordInput" ).type( scenario.pass )
           .get( "@submitButton" ).click()
-        verifyLoginError( `Invalid ${scenario.scenario}.` )
+        verifyLoginError( scenario.error )
         cy.url().should( "eql", `${Cypress.config().baseUrl}?controller=authentication` )
       } )
     } )
